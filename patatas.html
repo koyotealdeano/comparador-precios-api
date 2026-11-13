@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador de Precios de Supermercados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen text-gray-800 font-sans">
+
+    <!-- Header -->
+    <header class="bg-emerald-700 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-basket-shopping text-3xl text-yellow-300"></i>
+                <div>
+                    <h1 class="text-2xl font-bold">SuperCompare 🛒</h1>
+                    <p class="text-xs text-emerald-100">Comparativa en tiempo real (8 Supermercados Activos)</p>
+                </div>
+            </div>
+            <button id="btn-actualizar" onclick="actualizarPreciosReales()" class="bg-yellow-400 hover:bg-yellow-300 text-emerald-950 font-bold px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition flex items-center gap-2">
+                <i class="fa-solid fa-arrows-rotate" id="icon-spin"></i>
+                <span>Actualizar Precios en Tiempo Real</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        
+        <!-- Estado / Banner -->
+        <div id="status-banner" class="hidden mb-6 bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded shadow-sm flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-spinner animate-spin text-xl"></i>
+                <span id="status-text">Ejecutando Playwright scraping...</span>
+            </div>
+        </div>
+
+        <!-- Podio de Medallas -->
+        <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4 text-gray-700 flex items-center gap-2">
+                <i class="fa-solid fa-trophy text-yellow-500"></i> Podio de Precios (De más barato a más caro)
+            </h2>
+            <div id="podio-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Se genera dinámicamente con JS -->
+            </div>
+        </section>
+
+        <!-- Tabla Completa de Resultados -->
+        <section class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-800">Detalle de Productos Escaneados</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-semibold">8 Supermercados Activos</span>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b bg-gray-50 text-gray-600 text-sm">
+                            <th class="p-3">Posición</th>
+                            <th class="p-3">Supermercado</th>
+                            <th class="p-3">Producto</th>
+                            <th class="p-3">Precio Actual</th>
+                            <th class="p-3">Precio Anterior</th>
+                            <th class="p-3">Precio / Kg</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body" class="divide-y text-sm">
+                        <!-- Se llena dinámicamente con JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Datos iniciales con los 8 supermercados
+        let productosData = [
+            { id: 1, supermercado: 'Carrefour', producto: 'Calabaza sepallo 2 kg aprox', precioNum: 1.99, precioStr: '1,99 €', precioAntes: 'Sin oferta', precioKg: '1,00 €/kg' },
+            { id: 2, supermercado: 'DIA', producto: 'Calabaza a granel', precioNum: 1.85, precioStr: '1,85 €', precioAntes: 'Sin oferta', precioKg: '1,85 €/kg' },
+            { id: 3, supermercado: 'Alcampo', producto: 'Calabaza entera', precioNum: 1.75, precioStr: '1,75 €', precioAntes: 'Sin oferta', precioKg: '1,75 €/kg' },
+            { id: 4, supermercado: 'Alimerka', producto: 'Calabaza troceada', precioNum: 1.60, precioStr: '1,60 €', precioAntes: '1,95 €', precioKg: '1,60 €/kg' },
+            { id: 5, supermercado: 'Aldi', producto: 'Calabaza', precioNum: 1.25, precioStr: '1,25 €', precioAntes: '1,85 €', precioKg: '1,25 €/kg' },
+            { id: 6, supermercado: 'Mercadona', producto: 'Media calabaza cacahuete', precioNum: 2.22, precioStr: '2,22 €', precioAntes: 'Sin oferta', precioKg: '3,00 €/kg' },
+            { id: 7, supermercado: 'Familia', producto: 'Calabaza cacahuete, pieza al peso aprox. 1 kg', precioNum: 1.49, precioStr: '1,49 €', precioAntes: 'Sin oferta', precioKg: '1,49 €/kg (aprox. 1 kg)' },
+            { id: 8, supermercado: 'Más y Más', producto: 'Calabaza kg', precioNum: 2.32, precioStr: '2,32 €/ud', precioAntes: 'Sin oferta', precioKg: '1,45 €/kg' }
+        ];
+
+        function renderizarPagina() {
+            // Ordenar por precio numérico de menor a mayor
+            productosData.sort((a, b) => a.precioNum - b.precioNum);
+
+            const podio = document.getElementById('podio-container');
+            const tabla = document.getElementById('tabla-body');
+
+            podio.innerHTML = '';
+            tabla.innerHTML = '';
+
+            productosData.forEach((item, idx) => {
+                const pos = idx + 1;
+                let medalla = '📦';
+                let colorBorder = 'border-gray-200';
+                let bgBadge = 'bg-gray-100 text-gray-700';
+
+                if (pos === 1) {
+                    medalla = '🥇 ¡El más barato!';
+                    colorBorder = 'border-yellow-400 border-2 bg-yellow-50/30';
+                    bgBadge = 'bg-yellow-400 text-yellow-950 font-bold';
+                } else if (pos === 2) {
+                    medalla = '🥈 2º Puesto';
+                    colorBorder = 'border-slate-300 border-2';
+                    bgBadge = 'bg-slate-200 text-slate-800 font-bold';
+                } else if (pos === 3) {
+                    medalla = '🥉 3er Puesto';
+                    colorBorder = 'border-amber-600 border-2';
+                    bgBadge = 'bg-amber-100 text-amber-900 font-bold';
+                }
+
+                // Podio de tarjetas
+                podio.innerHTML += `
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition p-5 flex flex-col justify-between ${colorBorder}">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-xs px-2.5 py-1 rounded-full ${bgBadge}">${medalla}</span>
+                                <span class="text-xs font-bold text-gray-400">#${pos}</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-emerald-900">${item.supermercado}</h3>
+                            <p class="text-sm text-gray-600 mb-4">${item.producto}</p>
+                        </div>
+                        <div class="border-t pt-3 flex justify-between items-end">
+                            <div>
+                                <span class="text-xs text-gray-400 block">Por Kg: ${item.precioKg}</span>
+                                <span class="text-xs text-gray-400 block line-through">${item.precioAntes !== 'Sin oferta' ? 'Antes: ' + item.precioAntes : ''}</span>
+                            </div>
+                            <span class="text-2xl font-extrabold text-emerald-600">${item.precioStr}</span>
+                        </div>
+                    </div>
+                `;
+
+                // Filas de tabla
+                tabla.innerHTML += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-3 font-bold text-center">${pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : pos}</td>
+                        <td class="p-3 font-semibold text-emerald-800">${item.supermercado}</td>
+                        <td class="p-3 text-gray-700">${item.producto}</td>
+                        <td class="p-3 font-bold text-emerald-600 text-base">${item.precioStr}</td>
+                        <td class="p-3 text-gray-400 text-xs">${item.precioAntes}</td>
+                        <td class="p-3 text-gray-500 text-xs">${item.precioKg}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        async function actualizarPreciosReales() {
+            const btn = document.getElementById('btn-actualizar');
+            const icon = document.getElementById('icon-spin');
+            const banner = document.getElementById('status-banner');
+            const statusText = document.getElementById('status-text');
+
+            btn.disabled = true;
+            icon.classList.add('animate-spin');
+            banner.classList.remove('hidden');
+            statusText.innerText = "Abriendo Playwright y extrayendo datos de Carrefour, DIA, Alcampo, Alimerka, Aldi, Mercadona, Familia y Más y Más...";
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/comparar');
+                const data = await response.json();
+
+                if (data.status === 'ok' && data.datos) {
+                    productosData = data.datos.map((item, index) => {
+                        let num = parseFloat(item.actual.replace("€", "").replace("ud", "").replace("kg", "").replace("/", "").replace(",", ".").trim());
+                        return {
+                            id: index + 1,
+                            supermercado: item.super,
+                            producto: item.nombre,
+                            precioNum: isNaN(num) ? 999 : num,
+                            precioStr: item.actual,
+                            precioAntes: item.anterior,
+                            precioKg: item.kg
+                        };
+                    });
+                    renderizarPagina();
+                    alert("¡Precios actualizados en tiempo real!");
+                }
+            } catch (error) {
+                alert("No se pudo conectar con el backend (api.py). Recuerda ejecutar 'python api.py' en la terminal.");
+            } finally {
+                btn.disabled = false;
+                icon.classList.remove('animate-spin');
+                banner.classList.add('hidden');
+            }
+        }
+
+        // Carga inicial
+        renderizarPagina();
+    </script>
+</body>
+</html>

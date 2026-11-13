@@ -1,0 +1,368 @@
+{
+    "carne": {
+        "datos": [
+            {
+                "super": "Más y Más",
+                "nombre": "Carne picada Mixta kg",
+                "actual": "1,35 €/ud",
+                "anterior": "Sin oferta",
+                "kg": "13,50 €/kg (la unidad equivale a 0.1kg)"
+            },
+            {
+                "super": "Carrefour",
+                "nombre": "Preparado de carne burger meat vacuno y cerdo El Mercado 500 g",
+                "actual": "3,89 €",
+                "anterior": "Sin oferta",
+                "kg": "7,78 €/kg"
+            },
+            {
+                "super": "Alcampo",
+                "nombre": "Bandeja de preparado de carne picada mixta (vacuno-cerdo), elaborada sin gluten ROLER 800 g.",
+                "actual": "6,49 €",
+                "anterior": "Sin oferta",
+                "kg": "800g 8,11 € por kilogramo 800g (8,11 € por kilogramo)"
+            },
+            {
+                "super": "Familia",
+                "nombre": "Burguer meat cerdo vacuno O CAUREL, bandeja 1 kg",
+                "actual": "6,95 €",
+                "anterior": "Sin oferta",
+                "kg": "N/D"
+            },
+            {
+                "super": "DIA",
+                "nombre": "Carne picada de vacuno y cerdo Selección de Dia 900 g",
+                "actual": "7,49 €",
+                "anterior": "Sin oferta",
+                "kg": "(8,32 €/KILO)"
+            },
+            {
+                "super": "Mercadona",
+                "nombre": "Preparado de carne picada vacuno y cerdo",
+                "actual": "8,00 €",
+                "anterior": "Sin oferta",
+                "kg": "Bandeja 1 Kilo | 8,00 €/kg\nBandeja 1 kg | 8,00 €/kg"
+            },
+            {
+                "super": "Alimerka",
+                "nombre": "CARNE PICADA MIXTA *60% CERDO/40% VACUNO EL KILO",
+                "actual": "9,95 €/kg",
+                "anterior": "Sin oferta",
+                "kg": "Price reduced from\n11,95 €/kg\nto"
+            },
+            {
+                "super": "Aldi",
+                "nombre": "Burger meat picada de vacuno y cerdo",
+                "actual": "N/D",
+                "anterior": "Sin oferta",
+                "kg": "N/D"
+            }
+        ],
+        "ultima_actualizacion": "12/11/2026 a las 23:11"
+    },
+    "calabazas": {
+        "datos": [
+            {
+                "super": "Alimerka",
+                "nombre": "CALABAZA EL KILO",
+                "actual": "1,00 €/kg",
+                "anterior": "Sin oferta",
+                "kg": "Price reduced from\n1,45 €/kg\nto"
+            },
+            {
+                "super": "Aldi",
+                "nombre": "Calabaza",
+                "actual": "1.25 €",
+                "anterior": "Sin oferta",
+                "kg": "1.25 €/kg (precio kg (a granel))"
+            },
+            {
+                "super": "Familia",
+                "nombre": "Calabaza cacahuete, pieza al peso aprox. 1 kg",
+                "actual": "1,49 €",
+                "anterior": "Sin oferta",
+                "kg": "N/D"
+            },
+            {
+                "super": "DIA",
+                "nombre": "Calabaza 1.6 Kg aprox.",
+                "actual": "1,58 €",
+                "anterior": "Sin oferta",
+                "kg": "(0,99 €/KILO)"
+            },
+            {
+                "super": "Alcampo",
+                "nombre": "Calabaza entera.",
+                "actual": "1,91 €",
+                "anterior": "Sin oferta",
+                "kg": "1200g Aprox 1,59 € por kilogramo 1200g Aprox (1,59 € por kilogramo)"
+            },
+            {
+                "super": "Mercadona",
+                "nombre": "Media calabaza cacahuete",
+                "actual": "2,22 €",
+                "anterior": "Sin oferta",
+                "kg": "1/2 Pieza 740 Gramos aprox. | 3,00 €/kg\n1/2 Pieza 740 g aprox. | 3,00 €/kg"
+            },
+            {
+                "super": "Más y Más",
+                "nombre": "Calabaza kg",
+                "actual": "2,32 €/ud",
+                "anterior": "Sin oferta",
+                "kg": "1,45 €/kg (la unidad equivale a 1.6kg)"
+            },
+            {
+                "super": "Carrefour",
+                "nombre": "Calabaza sepallo Carrefour 2 kg aprox",
+                "actual": "3,78 €",
+                "anterior": "Sin oferta",
+                "kg": "1,89 €/kg"
+            }
+        ],
+        "ultima_actualizacion": "13/11/2026 a las 17:29"
+    },
+    "patatas": {
+        "datos": [
+            {
+                "super": "DIA",
+                "nombre": "Patatas 4 Kg",
+                "actual": "2,99 €",
+                "anterior": "Sin oferta",
+                "kg": "(0,75 €/KILO)"
+            },
+            {
+                "super": "Alimerka",
+                "nombre": "PATATA MALLA 5 KILOS",
+                "actual": "3,95 €",
+                "anterior": "Sin oferta",
+                "kg": "Price reduced from\n4,95 €\nto"
+            },
+            {
+                "super": "Familia",
+                "nombre": "Patata común, malla 5 kg",
+                "actual": "4,95 €",
+                "anterior": "Sin oferta",
+                "kg": "1 KILO A 0,99 €"
+            },
+            {
+                "super": "Alcampo",
+                "nombre": "Patatas malla de 5 kg.",
+                "actual": "4,99 €",
+                "anterior": "Sin oferta",
+                "kg": "5000g 1,00 € por kilogramo"
+            },
+            {
+                "super": "Mercadona",
+                "nombre": "Patatas",
+                "actual": "5,30 €",
+                "anterior": "Sin oferta",
+                "kg": "Malla 5 Kilos | 1,06 €/kg\nMalla 5 kg | 1,06 €/kg"
+            },
+            {
+                "super": "Carrefour",
+                "nombre": "Patata saco de 10 kg",
+                "actual": "9,89 €",
+                "anterior": "Sin oferta",
+                "kg": "0,99 €/kg"
+            },
+            {
+                "super": "Aldi",
+                "nombre": "Patatas",
+                "actual": "N/D",
+                "anterior": "Sin oferta",
+                "kg": "N/D"
+            },
+            {
+                "super": "Más y Más",
+                "nombre": "Patata bolsa 5kg",
+                "actual": "N/D",
+                "anterior": "Sin oferta",
+                "kg": "N/D"
+            }
+        ],
+        "ultima_actualizacion": "12/11/2026 a las 23:03"
+    },
+    "pina": {
+        "datos": [
+            {
+                "super": "Aldi",
+                "nombre": "Piña",
+                "actual": "0.99 €",
+                "anterior": "Sin oferta",
+                "kg": "N/D"
+            },
+            {
+                "super": "Alimerka",
+                "nombre": "PIÑA EL KILO",
+                "actual": "1,25 €/kg",
+                "anterior": "Sin oferta",
+                "kg": "Price reduced from\n1,79 €/kg\nto"
+            },
+            {
+                "super": "Alcampo",
+                "nombre": "Piña entera",
+                "actual": "2,66 €",
+                "anterior": "Sin oferta",
+                "kg": "1800g Aprox 1,48 € por kilogramo"
+            },
+            {
+                "super": "DIA",
+                "nombre": "Piña dulce tropical unidad 1.5 Kg aprox.",
+                "actual": "3,29 €",
+                "anterior": "Sin oferta",
+                "kg": "(2,19 €/KILO)"
+            },
+            {
+                "super": "Carrefour",
+                "nombre": "Piña premadurada 1,8 kg aprox",
+                "actual": "3,40 €",
+                "anterior": "Sin oferta",
+                "kg": "1,89 €/kg"
+            },
+            {
+                "super": "Familia",
+                "nombre": "Piña de Centro América, pieza al peso apox. 1.9 kg",
+                "actual": "3,71 €",
+                "anterior": "Sin oferta",
+                "kg": "1 KILO A 1,95 €"
+            },
+            {
+                "super": "Mercadona",
+                "nombre": "Piña",
+                "actual": "3,95 €",
+                "anterior": "Sin oferta",
+                "kg": "Pieza 1,97 Kilos aprox. | 2,00 €/kg\nPieza 1,97 kg aprox. | 2,00 €/kg"
+            },
+            {
+                "super": "Más y Más",
+                "nombre": "Piña con Color kg",
+                "actual": "4,29 €/ud",
+                "anterior": "Sin oferta",
+                "kg": "1,95 €/kg (la unidad equivale a 2.2kg)"
+            }
+        ],
+        "ultima_actualizacion": "12/11/2026 a las 22:03"
+    },
+    "langostinos": {
+        "datos": [
+            {
+                "super": "Más y Más",
+                "nombre": "Langostino cocido fresco 30/40kg",
+                "actual": "3,74 €/ud",
+                "anterior": "Sin oferta",
+                "kg": "14,95 €/kg (la unidad equivale a 0.25kg)"
+            },
+            {
+                "super": "DIA",
+                "nombre": "Langostino cocido Selección de Dia 400 g",
+                "actual": "4,29 €",
+                "anterior": "Sin oferta",
+                "kg": "(10,73 €/KILO)"
+            },
+            {
+                "super": "Alcampo",
+                "nombre": "Langostino cocidos calibre 30-40",
+                "actual": "4,43 €",
+                "anterior": "Sin oferta",
+                "kg": "500g Aprox 8,85 € por kilogramo 500g Aprox (8,85 € por kilogramo)"
+            },
+            {
+                "super": "Carrefour",
+                "nombre": "Langostino cocido congelado (40/60 ud) 500 g aprox",
+                "actual": "4,87 €",
+                "anterior": "Sin oferta",
+                "kg": "9,75 €/kg"
+            },
+            {
+                "super": "Familia",
+                "nombre": "Langostino cocido 30-40, al peso, compra mínima 500 g",
+                "actual": "5,00 €",
+                "anterior": "Sin oferta",
+                "kg": "1 KILO A 10,00 €"
+            },
+            {
+                "super": "Mercadona",
+                "nombre": "Langostino cocido",
+                "actual": "6,45 €",
+                "anterior": "Sin oferta",
+                "kg": "Bandeja 600 Gramos aprox. | 10,75 €/kg\nBandeja 600 g aprox. | 10,75 €/kg"
+            },
+            {
+                "super": "Alimerka",
+                "nombre": "LANGOSTINO COCIDO, 40 A 50 PIEZAS EL KILO",
+                "actual": "10,95 €/kg",
+                "anterior": "Sin oferta",
+                "kg": "10,95 €/kg"
+            },
+            {
+                "super": "Aldi",
+                "nombre": "Langostino cocido",
+                "actual": "N/D",
+                "anterior": "Sin oferta",
+                "kg": "N/D"
+            }
+        ],
+        "ultima_actualizacion": "12/11/2026 a las 23:00"
+    },
+    "naranjas": {
+        "datos": [
+            {
+                "super": "Mercadona",
+                "nombre": "Naranja de mesa",
+                "actual": "0,61 €",
+                "anterior": "Sin oferta",
+                "kg": "Pieza 285 Gramos aprox. | 2,15 €/kg\nPieza 285 g aprox. | 2,15 €/kg"
+            },
+            {
+                "super": "Más y Más",
+                "nombre": "Naranja mesa kg",
+                "actual": "1,03 €/ud",
+                "anterior": "Sin oferta",
+                "kg": "2,95 €/kg (la unidad equivale a 0.35kg)"
+            },
+            {
+                "super": "Alcampo",
+                "nombre": "Naranja al peso.",
+                "actual": "1,78 €",
+                "anterior": "Sin oferta",
+                "kg": "1000g Aprox 1,78 € por kilogramo 1000g Aprox (1,78 € por kilogramo)"
+            },
+            {
+                "super": "Aldi",
+                "nombre": "Naranja de mesa",
+                "actual": "1.79 €",
+                "anterior": "Sin oferta",
+                "kg": "1.79 €/kg (precio kg (a granel))"
+            },
+            {
+                "super": "Familia",
+                "nombre": "Naranja para postre, al peso, compra mínima 930 g / 3 uds",
+                "actual": "1,85 €",
+                "anterior": "Sin oferta",
+                "kg": "1 KILO A 1,99 €"
+            },
+            {
+                "super": "Alimerka",
+                "nombre": "NARANJA DE MESA EL KILO",
+                "actual": "1,99 €/kg",
+                "anterior": "Sin oferta",
+                "kg": "Price reduced from\n2,49 €/kg\nto"
+            },
+            {
+                "super": "Carrefour",
+                "nombre": "Naranja de mesa Carrefour 1 Kg aprox",
+                "actual": "2,19 €",
+                "anterior": "Sin oferta",
+                "kg": "2,19 €/kg"
+            },
+            {
+                "super": "DIA",
+                "nombre": "Naranja selección granel 1 Kg aprox.",
+                "actual": "2,19 €",
+                "anterior": "Sin oferta",
+                "kg": "(2,19 €/KILO)"
+            }
+        ],
+        "ultima_actualizacion": "13/11/2026 a las 01:01"
+    }
+}

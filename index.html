@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador de Precios - UGT Supercor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            background: #eef2f3;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .info-actualizacion {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        label {
+            font-weight: bold;
+            color: #34495e;
+        }
+        select, button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        select {
+            background: white;
+        }
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #219653;
+        }
+        
+        /* Animación del carrito de la compra */
+        .cart-animation-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .shopping-cart {
+            font-size: 40px;
+            position: relative;
+            animation: driveCart 1.5s infinite ease-in-out;
+        }
+
+        @keyframes driveCart {
+            0% { transform: translateX(-30px); opacity: 0.4; }
+            50% { transform: translateX(30px); opacity: 1; }
+            100% { transform: translateX(-30px); opacity: 0.4; }
+        }
+
+        .loading-text {
+            font-size: 16px;
+            color: #e67e22;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .mejor-precio {
+            background-color: #d4edda !important;
+            font-weight: bold;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Comparador de Precios de Supermercados</h1>
+
+    <!-- Controles para elegir producto y actualizar -->
+    <div class="controls">
+        <div>
+            <label for="productoSelect">Producto:</label>
+            <select id="productoSelect" onchange="cargarPrecios(false)">
+                <option value="calabazas">Calabazas</option>
+                <option value="patatas">Patatas</option>
+                <option value="carne">Carne Picada</option>
+                <option value="pina">Piña</option>
+                <option value="langostinos">Langostinos</option>
+                <option value="naranjas">Naranjas</option>
+            </select>
+        </div>
+        <button onclick="cargarPrecios(true)">Actualizar Precios en Tiempo Real</button>
+    </div>
+
+    <div id="infoActualizacion" class="info-actualizacion">Selecciona un producto para ver los datos guardados.</div>
+
+    <!-- Animación de carga con carrito en movimiento -->
+    <div id="loading" style="display: none;">
+        <div class="cart-animation-container">
+            <div class="shopping-cart">🛒💨</div>
+            <div class="loading-text">El carrito está recorriendo los supermercados... Por favor, espera un momento.</div>
+        </div>
+    </div>
+
+    <table id="tablaPrecios">
+        <thead>
+            <tr>
+                <th>Supermercado</th>
+                <th>Nombre del Producto</th>
+                <th>Precio Actual</th>
+                <th>Precio Anterior</th>
+                <th>Precio por Kilo / Formato</th>
+            </tr>
+        </thead>
+        <tbody id="cuerpoTabla">
+            <tr>
+                <td colspan="5" style="text-align: center; color: #7f8c8d;">Selecciona un producto del desplegable.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    window.onload = function() {
+        // Recuperar el último producto consultado de la memoria del navegador
+        const ultimoProducto = localStorage.getItem("ultimoProducto");
+        if (ultimoProducto) {
+            document.getElementById("productoSelect").value = ultimoProducto;
+        }
+        cargarPrecios(false);
+    };
+
+    async function cargarPrecios(forzarActualizacion) {
+        const selectElem = document.getElementById("productoSelect");
+        const productoElegido = selectElem.value;
+        
+        // Guardar la selección actual en la memoria del navegador
+        localStorage.setItem("ultimoProducto", productoElegido);
+
+        const urlApi = `http://127.0.0.1:8000/api/${productoElegido}?actualizar=${forzarActualizacion}`;
+
+        const loadingDiv = document.getElementById("loading");
+        const cuerpoTabla = document.getElementById("cuerpoTabla");
+        const infoDiv = document.getElementById("infoActualizacion");
+
+        if (forzarActualizacion) {
+            loadingDiv.style.display = "block";
+        }
+        
+        cuerpoTabla.innerHTML = ""; 
+
+        try {
+            const respuesta = await fetch(urlApi);
+            const resultado = await respuesta.json();
+
+            if (resultado.status === "ok") {
+                const datos = resultado.datos;
+                
+                if (resultado.ultima_actualizacion) {
+                    infoDiv.innerHTML = `📅 Última actualización de precios: <strong>${resultado.ultima_actualizacion}</strong>`;
+                } else {
+                    infoDiv.innerHTML = `📅 Sin datos previos guardados.`;
+                }
+
+                if (!datos || datos.length === 0) {
+                    cuerpoTabla.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #e67e22;">No hay datos para este producto todavía. Pulsa el botón de actualizar.</td></tr>`;
+                    return;
+                }
+
+                datos.forEach((item, index) => {
+                    const fila = document.createElement("tr");
+                    
+                    if (index === 0 && item.actual !== "N/D" && item.actual !== "No disponible") {
+                        fila.classList.add("mejor-precio");
+                    }
+
+                    let medalla = "";
+                    if (index === 0) medalla = "🥇 ";
+                    else if (index === 1) medalla = "🥈 ";
+                    else if (index === 2) medalla = "🥉 ";
+
+                    fila.innerHTML = `
+                        <td><strong>${medalla}${item.super}</strong></td>
+                        <td>${item.nombre}</td>
+                        <td>${item.actual}</td>
+                        <td>${item.anterior}</td>
+                        <td>${item.kg}</td>
+                    `;
+                    cuerpoTabla.appendChild(fila);
+                });
+            } else {
+                alert("Error al obtener los datos del servidor.");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("No se pudo conectar con el servidor backend (api.py). Asegúrate de que está encendido.");
+        } finally {
+            loadingDiv.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
